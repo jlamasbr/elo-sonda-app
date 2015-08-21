@@ -1,0 +1,12 @@
+*/target/
+*/.metadata/
+*.class
+*/bin/
+*/.settings/
+*.classpath
+*.project
+/.metadata/
+*/.tern-project
+*/.recommenders
+*/.idea
+*/RemoteSystemsTempFiles/
