@@ -8,16 +8,16 @@ package br.com.elo.sonda.app.domain;
  */
 public class Coordinate {
 
-	private final long latitude;
-	private final long longitude;
+	private final long longitude; //x leste-oeste
+	private final long latitude; //y norte-sul
 	
 	//representa uma coordenada minima que pode ser usada em uma plataforma.
 	private static final Coordinate MINIMUM_COORDINATE = new Coordinate(0, 0);
 
-	private Coordinate(long latitude, long longitude) {
+	private Coordinate(long longitude, long latitude) {
 		super();
-		this.latitude = latitude;
 		this.longitude = longitude;
+		this.latitude = latitude;
 	}
 
 	public long getLatitude() {
@@ -39,13 +39,13 @@ public class Coordinate {
 	}
 	
 	/**
-	 * Cria uma coordenada (x,y) onde x é latitude e y é longitude.
+	 * Cria uma coordenada (x,y) onde x é longitude e y é latitude.
 	 * @param latitude - latitude da coordenada.
 	 * @param longitude - longitude da coordenada.
 	 * @return {@link Coordinate} - coordenada criada.
 	 */
-	public static Coordinate createCoordinate(final long latitude, final long longitude) {
-		return new Coordinate(latitude, longitude);
+	public static Coordinate createCoordinate(final long longitude,final long latitude) {
+		return new Coordinate(longitude, latitude);
 	}
 
 	@Override

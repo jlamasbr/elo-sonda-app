@@ -11,8 +11,8 @@ public class PlatformTest {
 	@Test
 	public void testCreateNewPlatform(){
 		final long maxLatitude = 5;
-		final long maxLongitude = 4;
-		Coordinate coordinate = Coordinate.createCoordinate(maxLatitude, maxLongitude);
+		final long maxLongitude = 5;
+		Coordinate coordinate = Coordinate.createCoordinate(maxLongitude,maxLatitude);
 		Platform platform = Platform.createPlatform(coordinate);
 		
 		Assert.assertEquals(coordinate, platform.getMaxCoordinate());

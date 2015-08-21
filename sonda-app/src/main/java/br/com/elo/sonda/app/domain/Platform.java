@@ -40,7 +40,5 @@ public class Platform {
 	public String toString() {
 		return "Platform [maxCoordinate=" + maxCoordinate + ", minimumCoordinate=" + minimumCoordinate + "]";
 	}
-	
-	
 
 }
