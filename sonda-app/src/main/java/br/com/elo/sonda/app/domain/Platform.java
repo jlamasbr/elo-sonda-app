@@ -1,4 +1,4 @@
-package br.com.elo.domain;
+package br.com.elo.sonda.app.domain;
 
 /**
  * Representa uma plataforma que as sondas irão explorar

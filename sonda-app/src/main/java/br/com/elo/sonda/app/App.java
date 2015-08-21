@@ -1,4 +1,4 @@
-package br.com.elo;
+package br.com.elo.sonda.app;
 
 /**
  * Hello world!
