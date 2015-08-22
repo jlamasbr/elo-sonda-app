@@ -47,10 +47,37 @@ public class Coordinate {
 	public static Coordinate createCoordinate(final long longitude,final long latitude) {
 		return new Coordinate(longitude, latitude);
 	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (latitude ^ (latitude >>> 32));
+		result = prime * result + (int) (longitude ^ (longitude >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coordinate other = (Coordinate) obj;
+		if (latitude != other.latitude)
+			return false;
+		if (longitude != other.longitude)
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
-		return "Coordinate [latitude=" + latitude + ", longitude=" + longitude + "]";
+		return "Coordinate [longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
 
 }

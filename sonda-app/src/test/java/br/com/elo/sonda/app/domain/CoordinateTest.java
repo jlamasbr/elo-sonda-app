@@ -1,4 +1,4 @@
-package br.com.elo.domain;
+package br.com.elo.sonda.app.domain;
 
 import org.junit.Assert;
 import org.junit.Test;
