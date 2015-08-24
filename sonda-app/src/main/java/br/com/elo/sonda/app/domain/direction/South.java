@@ -7,9 +7,9 @@ import br.com.elo.sonda.app.domain.Coordinate;
  * 
  * @author jlamas
  */
-public class South implements Direction {
+public class South implements IDirection {
 	/**
-	 * Para instanciar {@link South} utilize {@link Directions}
+	 * Para instanciar {@link South} utilize {@link Direction}
 	 */
 	protected South() {
 		// para forçar a criacao da instancia via interface Destinations
@@ -26,12 +26,12 @@ public class South implements Direction {
 		return Coordinate.createCoordinate(fromCoordinate.getLongitude(), fromCoordinate.getLatitude() - 1);
 	}
 
-	public Direction getLeftDirection() {
-		return Directions.EAST;
+	public IDirection getLeftDirection() {
+		return Direction.EAST.getDirection();
 	}
 
-	public Direction getRightDirection() {
-		return Directions.WEST;
+	public IDirection getRightDirection() {
+		return Direction.WEST.getDirection();
 	}
 
 }

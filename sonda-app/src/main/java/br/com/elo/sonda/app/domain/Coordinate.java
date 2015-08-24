@@ -8,10 +8,10 @@ package br.com.elo.sonda.app.domain;
  */
 public class Coordinate {
 
-	private final long longitude; //x leste-oeste
-	private final long latitude; //y norte-sul
-	
-	//representa uma coordenada minima que pode ser usada em uma plataforma.
+	private final long longitude; // x leste-oeste
+	private final long latitude; // y norte-sul
+
+	// representa uma coordenada minima que pode ser usada em uma plataforma.
 	private static final Coordinate MINIMUM_COORDINATE = new Coordinate(0, 0);
 
 	private Coordinate(long longitude, long latitude) {
@@ -29,6 +29,40 @@ public class Coordinate {
 	}
 
 	/**
+	 * Verifica se uma coordenada é maior que uma segunda coordenada, ou seja,
+	 * se a latitude ou longitude de uma coordenada for maior que a outra, então
+	 * ela é considerada "maior".
+	 * 
+	 * @param coordinate
+	 *            - Coordenada que sera comparada
+	 * @return true se a coordenada passada como parametro for maior e false
+	 *         caso contrario.
+	 */
+	public boolean isBiggerThan(Coordinate coordinate) {
+		if (this.getLatitude() > coordinate.getLatitude() || this.getLongitude() > coordinate.getLongitude()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Verifica se uma coordenada é menor que uma segunda coordenada, ou seja,
+	 * se a latitude ou longitude de uma coordenada for menor que a outra, então
+	 * ela é considerada "menor".
+	 * 
+	 * @param coordinate
+	 *            - Coordenada que sera comparada
+	 * @return true se a coordenada passada como parametro for menor e false
+	 *         caso contrario.
+	 */
+	public boolean isLessThan(Coordinate coordinate) {
+		if (this.getLatitude() < coordinate.getLatitude() || this.getLongitude() < coordinate.getLongitude()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * cria uma coordenada minima, de acordo com o modelo toda plataforma tem a
 	 * coordenada minima em 0,0
 	 * 
@@ -37,18 +71,19 @@ public class Coordinate {
 	public static Coordinate minimumCoordinate() {
 		return MINIMUM_COORDINATE;
 	}
-	
+
 	/**
 	 * Cria uma coordenada (x,y) onde x é longitude e y é latitude.
-	 * @param latitude - latitude da coordenada.
-	 * @param longitude - longitude da coordenada.
+	 * 
+	 * @param latitude
+	 *            - latitude da coordenada.
+	 * @param longitude
+	 *            - longitude da coordenada.
 	 * @return {@link Coordinate} - coordenada criada.
 	 */
-	public static Coordinate createCoordinate(final long longitude,final long latitude) {
+	public static Coordinate createCoordinate(final long longitude, final long latitude) {
 		return new Coordinate(longitude, latitude);
 	}
-	
-	
 
 	@Override
 	public int hashCode() {

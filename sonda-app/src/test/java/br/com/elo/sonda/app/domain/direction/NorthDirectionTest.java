@@ -7,15 +7,15 @@ import junit.framework.Assert;
 
 public class NorthDirectionTest implements DirectionTest {
 	
-	private Direction north = Directions.NORTH;
+	private IDirection north = Direction.NORTH.getDirection();
 	@Test
 	public void testLeftDirection() {
-		Assert.assertEquals(Directions.WEST, north.getLeftDirection());
+		Assert.assertEquals(Direction.WEST.getDirection(), north.getLeftDirection());
 	}
 
 	@Test
 	public void testRightDirection() {
-		Assert.assertEquals(Directions.EAST, north.getRightDirection());
+		Assert.assertEquals(Direction.EAST.getDirection(), north.getRightDirection());
 	}
 
 	@Test

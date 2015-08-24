@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.elo.sonda.app.domain.Coordinate;
-import br.com.elo.sonda.app.domain.Platform;
+import br.com.elo.sonda.app.domain.platform.Platform;
 
 public class PlatformTest {
 	

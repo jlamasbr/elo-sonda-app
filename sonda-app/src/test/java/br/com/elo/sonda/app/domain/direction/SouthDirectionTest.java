@@ -6,15 +6,15 @@ import br.com.elo.sonda.app.domain.Coordinate;
 import junit.framework.Assert;
 
 public class SouthDirectionTest implements DirectionTest {
-	Direction south = Directions.SOUTH;
+	IDirection south = Direction.SOUTH.getDirection();
 	@Test
 	public void testLeftDirection(){
-		Assert.assertEquals(Directions.EAST, south.getLeftDirection());
+		Assert.assertEquals(Direction.EAST.getDirection(), south.getLeftDirection());
 	}
 	
 	@Test
 	public void testRightDirection(){
-		Assert.assertEquals(Directions.WEST, south.getRightDirection());
+		Assert.assertEquals(Direction.WEST.getDirection(), south.getRightDirection());
 	}
 	
 	@Test

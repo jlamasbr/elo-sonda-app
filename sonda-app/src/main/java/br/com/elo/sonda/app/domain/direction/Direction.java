@@ -1,37 +1,40 @@
 package br.com.elo.sonda.app.domain.direction;
 
-import br.com.elo.sonda.app.domain.Coordinate;
-
 /**
- * Interface que representa as acoes que uma direcao deve ter dentro do modelo.
+ * Enum que contem todas as implementações de direcoes disponiveis no modelo e
+ * que poderao ser utilizadas por uma sonda.
  * 
  * @author jlamas
  *
  */
-public interface Direction {
+public enum Direction {
 
-	/**
-	 * move uma coordenada de acordo de alguma implementação de
-	 * {@link Direction}
-	 * 
-	 * @param {@link
-	 * 			Coordinate} fromCoordinate - coordenada (x,y) de partida.
-	 * @return {@link Coordinate} toCoordinate - coordenada de chegada
-	 */
-	public Coordinate move(Coordinate fromCoordinate);
+	NORTH("N", new North()), SOUTH("S", new South()), EAST("E", new East()), WEST("W", new West());
 
-	/**
-	 * retorna a direcao que fica a esquerda
-	 * 
-	 * @return {@link Direction}
-	 */
-	public Direction getLeftDirection();
+	private String code;
+	private IDirection direction;
 
-	/**
-	 * retorna a direcao que fica a esquerda
-	 * 
-	 * @return {@link Direction}
-	 */
-	public Direction getRightDirection();
+	private Direction(String code, IDirection direction) {
+		this.code = code;
+		this.direction = direction;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public IDirection getDirection() {
+		return direction;
+	}
+
+	public static Direction fromCode(final String code) {
+		for (Direction direction : values()) {
+			if (direction.code.equalsIgnoreCase(code)) {
+				return direction;
+			}
+		}
+
+		throw new IllegalArgumentException("direction not found with code: " + code);
+	}
 
 }

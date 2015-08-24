@@ -1,4 +1,6 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.domain.platform;
+
+import br.com.elo.sonda.app.domain.Coordinate;
 
 /**
  * Representa uma plataforma que as sondas irão explorar
@@ -22,6 +24,26 @@ public class Platform {
 
 	public Coordinate getMinimumCoordinate() {
 		return minimumCoordinate;
+	}
+
+	/**
+	 * Verifica se uma determinada coordenada esta dentro dos limites da
+	 * plataforma.
+	 * 
+	 * @param coordinate
+	 *            coordenada que deverá ser validada na plataforma.
+	 * @throws CoordinateNotAvaibleOnPlatformException
+	 *             caso a coordenada não exista na plataforma.
+	 */
+	public void validateCoordinate(Coordinate coordinate) throws CoordinateNotAvaibleOnPlatformException {
+		if (coordinate.isLessThan(minimumCoordinate)) {
+			throw new CoordinateNotAvaibleOnPlatformException(
+					"the coordinate: " + coordinate + " should be bigger or equal than: " + minimumCoordinate);
+		}
+		if (coordinate.isBiggerThan(maxCoordinate)) {
+			throw new CoordinateNotAvaibleOnPlatformException(
+					"the coordinate: " + coordinate + " should be less or equal than: " + maxCoordinate);
+		}
 	}
 
 	/**

@@ -4,76 +4,75 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.elo.sonda.app.domain.Coordinate;
-import br.com.elo.sonda.app.domain.Platform;
 import br.com.elo.sonda.app.domain.SpaceProbe;
-import br.com.elo.sonda.app.domain.direction.Directions;
+import br.com.elo.sonda.app.domain.direction.Direction;
+import br.com.elo.sonda.app.domain.platform.CoordinateNotAvaibleOnPlatformException;
+import br.com.elo.sonda.app.domain.platform.Platform;
 
 public class SpaceProbeTest {
 	Platform platform = Platform.createPlatform(Coordinate.createCoordinate(5, 5));
 	
 	@Test
-	public void testTurnLeft(){
-		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Directions.NORTH);
-		probe.turnLeft();
+	public void testTurnLeft() throws CoordinateNotAvaibleOnPlatformException{
+		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Direction.fromCode("N"));
+		probe.executeCommand(Command.fromCode("L"));
 		Assert.assertEquals(Coordinate.createCoordinate(1, 2), probe.getCoordinate());
-		Assert.assertEquals(Directions.WEST, probe.getDirection());
+		Assert.assertEquals(Direction.WEST.getDirection(), probe.getDirection());
 	}
 	
 	@Test
-	public void testTurnRight(){
-		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Directions.NORTH);
-		probe.turnRight();
+	public void testTurnRight() throws CoordinateNotAvaibleOnPlatformException{
+		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Direction.fromCode("N"));
+		probe.executeCommand(Command.fromCode("R"));
 		Assert.assertEquals(Coordinate.createCoordinate(1, 2), probe.getCoordinate());
-		Assert.assertEquals(Directions.EAST, probe.getDirection());
+		Assert.assertEquals(Direction.EAST.getDirection(), probe.getDirection());
 	}
 	
 	@Test
-	public void testMove(){
-		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Directions.NORTH);
-		probe.move();
+	public void testMove() throws CoordinateNotAvaibleOnPlatformException{
+		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Direction.fromCode("N"));
+		probe.executeCommand(Command.fromCode("M"));
 		Assert.assertEquals(Coordinate.createCoordinate(1, 3), probe.getCoordinate());
-		Assert.assertEquals(Directions.NORTH, probe.getDirection());
+		Assert.assertEquals(Direction.NORTH.getDirection(), probe.getDirection());
 	}
 	
 	@Test
-	public void testRoute(){
-	
-		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Directions.NORTH);
+	public void testRoute() throws CoordinateNotAvaibleOnPlatformException{
+		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(1, 2), Direction.fromCode("N"));
 		
-		probe.turnLeft();
-		probe.move();
-		probe.turnLeft();
-		probe.move();
-		probe.turnLeft();
-		probe.move();
-		probe.turnLeft();
-		probe.move();
-		probe.move();
+		probe.executeCommand(Command.fromCode("L"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("L"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("L"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("L"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("M"));
 		
 		Assert.assertEquals(1, probe.getCoordinate().getLongitude());
 		Assert.assertEquals(3, probe.getCoordinate().getLatitude());
-		Assert.assertEquals(Directions.NORTH, probe.getDirection());
+		Assert.assertEquals(Direction.NORTH.getDirection(), probe.getDirection());
 	}
 	
 	@Test
-	public void testRoute2(){
-		Platform platform = Platform.createPlatform(Coordinate.createCoordinate(5, 5));
-		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(3, 3), Directions.EAST);
+	public void testRoute2() throws CoordinateNotAvaibleOnPlatformException{
+		SpaceProbe probe = new SpaceProbe(platform, Coordinate.createCoordinate(3, 3), Direction.fromCode("E"));
 		
-		probe.move();
-		probe.move();
-		probe.turnRight();
-		probe.move();
-		probe.move();
-		probe.turnRight();
-		probe.move();
-		probe.turnRight();
-		probe.turnRight();
-		probe.move();
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("R"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("R"));
+		probe.executeCommand(Command.fromCode("M"));
+		probe.executeCommand(Command.fromCode("R"));
+		probe.executeCommand(Command.fromCode("R"));
+		probe.executeCommand(Command.fromCode("M"));
 		
 		Assert.assertEquals(5, probe.getCoordinate().getLongitude());
 		Assert.assertEquals(1, probe.getCoordinate().getLatitude());
-		Assert.assertEquals(Directions.EAST, probe.getDirection());
+		Assert.assertEquals(Direction.EAST.getDirection(), probe.getDirection());
 	}
 
 }
