@@ -1,9 +1,9 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.coordinate;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.elo.sonda.app.domain.Coordinate;
+import br.com.elo.sonda.app.coordinate.Coordinate;
 
 public class CoordinateTest {
 

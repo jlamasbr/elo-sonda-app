@@ -1,10 +1,10 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.platform;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.elo.sonda.app.domain.Coordinate;
-import br.com.elo.sonda.app.domain.platform.Platform;
+import br.com.elo.sonda.app.coordinate.Coordinate;
+import br.com.elo.sonda.app.platform.Platform;
 
 public class PlatformTest {
 	

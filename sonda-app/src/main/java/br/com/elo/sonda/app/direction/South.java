@@ -1,6 +1,6 @@
-package br.com.elo.sonda.app.domain.direction;
+package br.com.elo.sonda.app.direction;
 
-import br.com.elo.sonda.app.domain.Coordinate;
+import br.com.elo.sonda.app.coordinate.Coordinate;
 
 /**
  * Implementacao da direcao Sul

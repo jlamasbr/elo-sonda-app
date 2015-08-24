@@ -1,6 +1,6 @@
-package br.com.elo.sonda.app.domain.platform;
+package br.com.elo.sonda.app.platform;
 
-import br.com.elo.sonda.app.domain.Coordinate;
+import br.com.elo.sonda.app.coordinate.Coordinate;
 
 /**
  * Representa uma plataforma que as sondas irão explorar

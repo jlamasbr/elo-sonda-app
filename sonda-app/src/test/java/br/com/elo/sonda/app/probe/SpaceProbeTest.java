@@ -1,13 +1,14 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.probe;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.elo.sonda.app.domain.Coordinate;
-import br.com.elo.sonda.app.domain.SpaceProbe;
-import br.com.elo.sonda.app.domain.direction.Direction;
-import br.com.elo.sonda.app.domain.platform.CoordinateNotAvaibleOnPlatformException;
-import br.com.elo.sonda.app.domain.platform.Platform;
+import br.com.elo.sonda.app.coordinate.Coordinate;
+import br.com.elo.sonda.app.direction.Direction;
+import br.com.elo.sonda.app.platform.CoordinateNotAvaibleOnPlatformException;
+import br.com.elo.sonda.app.platform.Platform;
+import br.com.elo.sonda.app.probe.Command;
+import br.com.elo.sonda.app.probe.SpaceProbe;
 
 public class SpaceProbeTest {
 	Platform platform = Platform.createPlatform(Coordinate.createCoordinate(5, 5));

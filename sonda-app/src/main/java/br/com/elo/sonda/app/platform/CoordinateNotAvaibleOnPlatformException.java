@@ -1,4 +1,4 @@
-package br.com.elo.sonda.app.domain.platform;
+package br.com.elo.sonda.app.platform;
 
 public class CoordinateNotAvaibleOnPlatformException extends Exception {
 

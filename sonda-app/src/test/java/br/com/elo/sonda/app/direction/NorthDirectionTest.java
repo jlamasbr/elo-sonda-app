@@ -1,8 +1,10 @@
-package br.com.elo.sonda.app.domain.direction;
+package br.com.elo.sonda.app.direction;
 
 import org.junit.Test;
 
-import br.com.elo.sonda.app.domain.Coordinate;
+import br.com.elo.sonda.app.coordinate.Coordinate;
+import br.com.elo.sonda.app.direction.Direction;
+import br.com.elo.sonda.app.direction.IDirection;
 import junit.framework.Assert;
 
 public class NorthDirectionTest implements DirectionTest {

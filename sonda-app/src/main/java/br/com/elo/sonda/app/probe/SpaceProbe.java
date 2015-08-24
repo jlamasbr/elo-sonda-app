@@ -1,9 +1,10 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.probe;
 
-import br.com.elo.sonda.app.domain.direction.Direction;
-import br.com.elo.sonda.app.domain.direction.IDirection;
-import br.com.elo.sonda.app.domain.platform.CoordinateNotAvaibleOnPlatformException;
-import br.com.elo.sonda.app.domain.platform.Platform;
+import br.com.elo.sonda.app.coordinate.Coordinate;
+import br.com.elo.sonda.app.direction.Direction;
+import br.com.elo.sonda.app.direction.IDirection;
+import br.com.elo.sonda.app.platform.CoordinateNotAvaibleOnPlatformException;
+import br.com.elo.sonda.app.platform.Platform;
 
 /**
  * Classe que representa uma sonda espacial

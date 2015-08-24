@@ -1,4 +1,4 @@
-package br.com.elo.sonda.app.domain;
+package br.com.elo.sonda.app.coordinate;
 
 /**
  * Classe que representa uma coordenada (latitude,longitude)

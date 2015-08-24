@@ -1,4 +1,4 @@
-package br.com.elo.sonda.app.domain.direction;
+package br.com.elo.sonda.app.direction;
 
 /**
  * Enum que contem todas as implementações de direcoes disponiveis no modelo e

@@ -1,4 +1,4 @@
-package br.com.elo.sonda.app.domain.direction;
+package br.com.elo.sonda.app.direction;
 
 public interface DirectionTest {
 	
