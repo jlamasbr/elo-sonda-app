@@ -2,7 +2,9 @@ package br.com.elo.sonda.app.probe;
 
 public enum Command {
 
-	TURN_RIGHT("R"), TURN_LEFT("L"), MOVE("M");
+	TURN_RIGHT("R"), //
+	TURN_LEFT("L"), //
+	MOVE("M");//
 
 	private String code;
 

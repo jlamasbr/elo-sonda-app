@@ -1,6 +1,9 @@
 package br.com.elo.sonda.app.platform;
 
+import java.util.HashMap;
+
 import br.com.elo.sonda.app.coordinate.Coordinate;
+import br.com.elo.sonda.app.probe.SpaceProbe;
 
 /**
  * Representa uma plataforma que as sondas irão explorar
@@ -12,10 +15,12 @@ public class Platform {
 
 	private final Coordinate maxCoordinate;
 	private final Coordinate minimumCoordinate;
-
+	private HashMap<Coordinate, SpaceProbe> spaceProbes;
+	
 	private Platform(Coordinate maxCoordinate) {
 		this.maxCoordinate = maxCoordinate;
 		this.minimumCoordinate = Coordinate.minimumCoordinate();
+		this.spaceProbes = new HashMap<Coordinate, SpaceProbe>();
 	}
 
 	public Coordinate getMaxCoordinate() {
@@ -24,6 +29,11 @@ public class Platform {
 
 	public Coordinate getMinimumCoordinate() {
 		return minimumCoordinate;
+	}
+	
+	public void registerProbeCoordinateOnPlatform(final SpaceProbe probe) throws CoordinateNotAvaibleOnPlatformException{
+		validateCoordinate(probe.getCoordinate());
+		this.spaceProbes.put(probe.getCoordinate(), probe);
 	}
 
 	/**
@@ -35,7 +45,7 @@ public class Platform {
 	 * @throws CoordinateNotAvaibleOnPlatformException
 	 *             caso a coordenada não exista na plataforma.
 	 */
-	public void validateCoordinate(Coordinate coordinate) throws CoordinateNotAvaibleOnPlatformException {
+	private void validateCoordinate(Coordinate coordinate) throws CoordinateNotAvaibleOnPlatformException {
 		if (coordinate.isLessThan(minimumCoordinate)) {
 			throw new CoordinateNotAvaibleOnPlatformException(
 					"the coordinate: " + coordinate + " should be bigger or equal than: " + minimumCoordinate);
@@ -43,7 +53,7 @@ public class Platform {
 		if (coordinate.isBiggerThan(maxCoordinate)) {
 			throw new CoordinateNotAvaibleOnPlatformException(
 					"the coordinate: " + coordinate + " should be less or equal than: " + maxCoordinate);
-		}
+		}		
 	}
 
 	/**

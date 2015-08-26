@@ -1,5 +1,7 @@
 package br.com.elo.sonda.app.probe;
 
+import java.util.List;
+
 import br.com.elo.sonda.app.coordinate.Coordinate;
 import br.com.elo.sonda.app.direction.Direction;
 import br.com.elo.sonda.app.direction.IDirection;
@@ -18,10 +20,9 @@ public class SpaceProbe {
 	private Coordinate coordinate;
 	private IDirection direction;
 
-	public SpaceProbe(final Platform platform, // plataforma
+	public SpaceProbe(
 			final Coordinate coordinate, // coordenada incial da sonda
-			final Direction direction) { // direcao inicial da sonta
-		this.platform = platform;
+			final Direction direction) { // direcao inicial da sonda
 		this.coordinate = coordinate;
 		this.direction = direction.getDirection();
 	}
@@ -53,19 +54,26 @@ public class SpaceProbe {
 	}
 
 	/**
-	 * move a sonda de acordo com a a direcao corrente.
+	 * move a sonda de acordo com a direcao corrente.
 	 * 
 	 * @throws CoordinateNotAvaibleOnPlatformException
 	 *             - caso a coordenada requisitada pela sonda não exista na
 	 *             plataforma.
 	 */
 	private void move() throws CoordinateNotAvaibleOnPlatformException {
-		Coordinate newCoordinate = direction.move(coordinate);
-		platform.validateCoordinate(newCoordinate);
-		coordinate = newCoordinate;
+		coordinate = direction.move(coordinate);
+		platform.registerProbeCoordinateOnPlatform(this);
 	}
 	
-	public void executeCommand(Command command) throws CoordinateNotAvaibleOnPlatformException{
+	
+	public void explorePlatform(Platform platform, List<Command> commands) throws CoordinateNotAvaibleOnPlatformException{
+		this.platform = platform;
+		for (Command command : commands){
+			executeCommand(command);
+		}
+	}
+	
+	private void executeCommand(Command command) throws CoordinateNotAvaibleOnPlatformException{
 		switch (command) {
 		case MOVE:
 			move();
@@ -77,7 +85,7 @@ public class SpaceProbe {
 			turnRight();
 			break;
 		default:
-			break;
+			throw new IllegalArgumentException("unknow command: " + command);
 		}
 	}
 }
