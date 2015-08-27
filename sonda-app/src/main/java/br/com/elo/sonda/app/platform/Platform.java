@@ -1,6 +1,8 @@
 package br.com.elo.sonda.app.platform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import br.com.elo.sonda.app.coordinate.Coordinate;
 import br.com.elo.sonda.app.probe.SpaceProbe;
@@ -15,12 +17,14 @@ public class Platform {
 
 	private final Coordinate maxCoordinate;
 	private final Coordinate minimumCoordinate;
-	private HashMap<Coordinate, SpaceProbe> spaceProbes;
+	private List<SpaceProbe> spaceProbes;
+	private HashMap<Coordinate, SpaceProbe> probesMap;
 	
-	private Platform(Coordinate maxCoordinate) {
+	private Platform(Coordinate maxCoordinate){
 		this.maxCoordinate = maxCoordinate;
 		this.minimumCoordinate = Coordinate.minimumCoordinate();
-		this.spaceProbes = new HashMap<Coordinate, SpaceProbe>();
+		this.probesMap = new HashMap<Coordinate, SpaceProbe>();
+		this.spaceProbes = new ArrayList<SpaceProbe>();
 	}
 
 	public Coordinate getMaxCoordinate() {
@@ -31,9 +35,30 @@ public class Platform {
 		return minimumCoordinate;
 	}
 	
-	public void registerProbeCoordinateOnPlatform(final SpaceProbe probe) throws CoordinateNotAvaibleOnPlatformException{
+	public List<SpaceProbe> getSpaceProbes() {
+		return spaceProbes;
+	}
+	
+	public SpaceProbe retrieveProbeByCoordinate(final Coordinate coordinate){
+		return probesMap.get(coordinate);
+	}
+	
+	public void registerProbeCoordinateOnPlatform(final SpaceProbe probe) throws CoordinateNotFoundOnPlatformException{
 		validateCoordinate(probe.getCoordinate());
-		this.spaceProbes.put(probe.getCoordinate(), probe);
+		this.probesMap.put(probe.getCoordinate(), probe);
+	}
+	
+	public void addProbesOnPlatform(SpaceProbe ... probes) throws CoordinateNotFoundOnPlatformException{
+		for (int i = 0; i < probes.length; i++) {
+			registerProbeCoordinateOnPlatform(probes[i]);
+			spaceProbes.add(probes[i]);	
+		}
+	}
+
+	public void explorePlatformWithProbes() throws CoordinateNotFoundOnPlatformException{
+		for(SpaceProbe spaceProbe : this.spaceProbes){
+			spaceProbe.explorePlatform(this);
+		}	
 	}
 
 	/**
@@ -42,18 +67,13 @@ public class Platform {
 	 * 
 	 * @param coordinate
 	 *            coordenada que deverá ser validada na plataforma.
-	 * @throws CoordinateNotAvaibleOnPlatformException
+	 * @throws CoordinateNotFoundOnPlatformException
 	 *             caso a coordenada não exista na plataforma.
 	 */
-	private void validateCoordinate(Coordinate coordinate) throws CoordinateNotAvaibleOnPlatformException {
-		if (coordinate.isLessThan(minimumCoordinate)) {
-			throw new CoordinateNotAvaibleOnPlatformException(
-					"the coordinate: " + coordinate + " should be bigger or equal than: " + minimumCoordinate);
+	private void validateCoordinate(Coordinate coordinate) throws CoordinateNotFoundOnPlatformException {
+		if (coordinate.isLessThan(minimumCoordinate) || coordinate.isBiggerThan(maxCoordinate)) {
+			throw new CoordinateNotFoundOnPlatformException(coordinate, minimumCoordinate, maxCoordinate);
 		}
-		if (coordinate.isBiggerThan(maxCoordinate)) {
-			throw new CoordinateNotAvaibleOnPlatformException(
-					"the coordinate: " + coordinate + " should be less or equal than: " + maxCoordinate);
-		}		
 	}
 
 	/**
@@ -63,6 +83,7 @@ public class Platform {
 	 * @param maxCoordinate
 	 *            - coordenada maxima que a plataforma ira suportar
 	 * @return - {@link Platform} plataforma criada.
+	 * @throws CoordinateNotFoundOnPlatformException 
 	 */
 	public static Platform createPlatform(final Coordinate maxCoordinate) {
 		return new Platform(maxCoordinate);
