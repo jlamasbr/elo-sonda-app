@@ -5,22 +5,22 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import br.com.elo.sonda.api.coordinate.Coordinate;
+import br.com.elo.sonda.api.coordinate.CoordinateParameter;
 
-public class ProbePosition {
+public class ProbePositionParameter {
 	
 	@NotNull(message="Coordinate in probePosition is required.")
 	@Valid
-	private Coordinate coordinate;
+	private CoordinateParameter coordinate;
 	
 	@NotBlank(message="Direction in the probePosition is required.")
 	private String direction;
 	
-	public Coordinate getCoordinate() {
+	public CoordinateParameter getCoordinate() {
 		return coordinate;
 	}
 	
-	public void setCoordinate(Coordinate initialCoordinate) {
+	public void setCoordinate(CoordinateParameter initialCoordinate) {
 		this.coordinate = initialCoordinate;
 	}
 	

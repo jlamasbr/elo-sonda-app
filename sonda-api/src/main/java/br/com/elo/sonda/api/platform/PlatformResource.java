@@ -1,4 +1,4 @@
-package br.com.elo.sonda.api.probe;
+package br.com.elo.sonda.api.platform;
 
 import javax.validation.Valid;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/platform")
-public class SpaceProbeResource {
+public class PlatformResource {
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody ProbeExploreRequest explorePlatform(@RequestBody @Valid ProbeExploreRequest request) {
+	public @ResponseBody PlatformExploreRequest explorePlatform(@RequestBody @Valid PlatformExploreRequest request) {
 		
 		
 		return request;

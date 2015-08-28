@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
-public class Coordinate {
+public class CoordinateParameter {
 
 	@NotNull(message = "Longitude is required.")
 	@Min(value = 0L, message = "Longitude must be greater or equal than 0")
