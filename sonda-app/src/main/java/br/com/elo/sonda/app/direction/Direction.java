@@ -9,7 +9,10 @@ package br.com.elo.sonda.app.direction;
  */
 public enum Direction {
 
-	NORTH("N", new North()), SOUTH("S", new South()), EAST("E", new East()), WEST("W", new West());
+	NORTH("N", new North()),
+	SOUTH("S", new South()),
+	EAST("E", new East()), 
+	WEST("W", new West());
 
 	private String code;
 	private IDirection direction;

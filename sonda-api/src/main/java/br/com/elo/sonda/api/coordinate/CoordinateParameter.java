@@ -3,15 +3,17 @@ package br.com.elo.sonda.api.coordinate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import br.com.elo.sonda.api.error.ApiErrorMessage;
+
 
 public class CoordinateParameter {
 
-	@NotNull(message = "Longitude is required.")
-	@Min(value = 0L, message = "Longitude must be greater or equal than 0")
+	@NotNull(message = ApiErrorMessage.LONGITUDE_REQUIRED)
+	@Min(value = 0L, message=ApiErrorMessage.INVALID_LONGITUDE)
 	private Long longitude;
 
-	@NotNull(message = "Latitude is required.")
-	@Min(value = 0L, message = "Latitude must be greater or equal than 0")
+	@NotNull(message = ApiErrorMessage.LATITUDE_REQUIRED)
+	@Min(value = 0L, message=ApiErrorMessage.INVALID_LATITUDE)
 	private Long latitude;
 
 	public Long getLongitude() {

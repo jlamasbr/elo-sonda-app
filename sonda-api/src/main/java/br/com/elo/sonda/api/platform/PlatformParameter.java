@@ -4,10 +4,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import br.com.elo.sonda.api.coordinate.CoordinateParameter;
+import br.com.elo.sonda.api.error.ApiErrorMessage;
 
 public class PlatformParameter {
 
-	@NotNull(message = "MaxCoordinate in platform is required.")
+	@NotNull(message = ApiErrorMessage.PLATFORM_MAX_COORDINATE_REQUIRED)
 	@Valid
 	private CoordinateParameter maxCoordinate;
 
