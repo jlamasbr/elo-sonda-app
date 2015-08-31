@@ -48,10 +48,10 @@ public class Platform {
 		this.probesMap.put(probe.getCoordinate(), probe);
 	}
 	
-	public void addProbesOnPlatform(SpaceProbe ... probes) throws CoordinateNotFoundOnPlatformException{
-		for (int i = 0; i < probes.length; i++) {
-			registerProbeCoordinateOnPlatform(probes[i]);
-			spaceProbes.add(probes[i]);	
+	public void addProbesOnPlatform(List<SpaceProbe> probes) throws CoordinateNotFoundOnPlatformException{
+		for (SpaceProbe probe: probes) {
+			registerProbeCoordinateOnPlatform(probe);
+			spaceProbes.add(probe);	
 		}
 	}
 

@@ -1,6 +1,7 @@
 package br.com.elo.sonda.app.platform;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -33,13 +34,13 @@ public class PlatformTest {
 
 		Coordinate coordinate = Coordinate.createCoordinate(3, 3);
 		Platform platform = Platform.createPlatform(coordinate);
-		platform.addProbesOnPlatform(probe1,probe2);
-		
+		platform.addProbesOnPlatform(Arrays.asList(probe1, probe2));
+
 		Assert.assertNotNull(platform.retrieveProbeByCoordinate(probe1.getCoordinate()));
 		Assert.assertNotNull(platform.retrieveProbeByCoordinate(probe2.getCoordinate()));
 	}
-	
-	@Test(expected=CoordinateNotFoundOnPlatformException.class)
+
+	@Test(expected = CoordinateNotFoundOnPlatformException.class)
 	public void testAddProbesWithInvalidCoordinate() throws CoordinateNotFoundOnPlatformException {
 
 		SpaceProbe probe1 = createProbe(Coordinate.createCoordinate(1, 2));
@@ -47,9 +48,9 @@ public class PlatformTest {
 
 		Coordinate coordinate = Coordinate.createCoordinate(3, 3);
 		Platform platform = Platform.createPlatform(coordinate);
-		platform.addProbesOnPlatform(probe1,probe2);
+		platform.addProbesOnPlatform(Arrays.asList(probe1, probe2));
 	}
-	
+
 	@Test
 	public void testExplorePlatformWithProbes() throws CoordinateNotFoundOnPlatformException {
 
@@ -58,14 +59,14 @@ public class PlatformTest {
 
 		Coordinate coordinate = Coordinate.createCoordinate(3, 3);
 		Platform platform = Platform.createPlatform(coordinate);
-		platform.addProbesOnPlatform(probe1,probe2);
+		platform.addProbesOnPlatform(Arrays.asList(probe1, probe2));
 		platform.explorePlatformWithProbes();
-		
+
 		Assert.assertEquals(probe1, platform.retrieveProbeByCoordinate(Coordinate.createCoordinate(1, 3)));
 		Assert.assertEquals(probe2, platform.retrieveProbeByCoordinate(Coordinate.createCoordinate(3, 2)));
 	}
-	
-	@Test(expected=CoordinateNotFoundOnPlatformException.class)
+
+	@Test(expected = CoordinateNotFoundOnPlatformException.class)
 	public void testExplorePlatformWithProbesWithInvalidProbCommand() throws CoordinateNotFoundOnPlatformException {
 
 		SpaceProbe probe1 = createProbe(Coordinate.createCoordinate(1, 2));
@@ -73,7 +74,7 @@ public class PlatformTest {
 
 		Coordinate coordinate = Coordinate.createCoordinate(3, 3);
 		Platform platform = Platform.createPlatform(coordinate);
-		platform.addProbesOnPlatform(probe1,probe2);
+		platform.addProbesOnPlatform(Arrays.asList(probe1, probe2));
 		platform.explorePlatformWithProbes();
 	}
 

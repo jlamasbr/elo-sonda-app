@@ -1,47 +1,52 @@
 package br.com.elo.sonda.api.platform;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.elo.sonda.app.coordinate.Coordinate;
-import br.com.elo.sonda.app.direction.Direction;
+import br.com.elo.sonda.api.probe.ProbeConverter;
 import br.com.elo.sonda.app.platform.CoordinateNotFoundOnPlatformException;
 import br.com.elo.sonda.app.platform.Platform;
-import br.com.elo.sonda.app.probe.Command;
+import br.com.elo.sonda.app.platform.PlatformService;
 import br.com.elo.sonda.app.probe.SpaceProbe;
 
 @RestController
 @RequestMapping(value = "/platform")
+@Service
 public class PlatformResource {
 
+	@Autowired
+	PlatformService platformService;
+
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody PlatformExploreRequest explorePlatform(@RequestBody @Valid PlatformExploreRequest request) {
+	public @ResponseBody PlatformExploreResponse explorePlatform(@RequestBody @Valid PlatformExploreRequest request) {
+		PlatformExploreResponse response = new PlatformExploreResponse();
+	
+		Platform platform = PlatformConverter.convertToPlatform(request.getPlatform());
+		List<SpaceProbe> probes = ProbeConverter.convertToSpaceProbe(request.getSpaceProbes());
+
+		try {
+			platform = platformService.explorePlatform(platform, probes);
+			response.setProbes(ProbeConverter.convertToSpaceProbeParameter(platform.getSpaceProbes()));
+		} catch (CoordinateNotFoundOnPlatformException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		return request;
+		return response;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody PlatformExploreRequest findPlatform() {
-		
-		Platform platform = Platform.createPlatform(Coordinate.createCoordinate(1, 1));
-		SpaceProbe probe = new SpaceProbe(Coordinate.createCoordinate(2, 2), Direction.NORTH, Arrays.asList(Command.fromCode("M")));
-	
-		try {
-			platform.addProbesOnPlatform(probe);
-		} catch (CoordinateNotFoundOnPlatformException e) {
-		throw new RuntimeException(e);
-		}
-		
-		throw new NullPointerException("erro");
-		//return request;
+		return null;
 	}
-	
+
 }

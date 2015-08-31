@@ -40,4 +40,13 @@ public enum Direction {
 		throw new IllegalArgumentException("direction not found with code: " + code);
 	}
 
+	public static Direction fromDirection(IDirection iDirection){
+		for (Direction direction : values()) {
+			if (direction.direction.equals(iDirection)) {
+				return direction;
+			}
+		}
+
+		throw new IllegalArgumentException("direction not found");
+	}
 }

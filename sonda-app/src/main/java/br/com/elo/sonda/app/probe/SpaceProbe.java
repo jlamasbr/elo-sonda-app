@@ -41,6 +41,10 @@ public class SpaceProbe {
 	public IDirection getDirection() {
 		return direction;
 	}
+	
+	public List<Command> getCommands() {
+		return commands;
+	}
 
 	/**
 	 * posiciona a sonda a sua direcao esquerda
