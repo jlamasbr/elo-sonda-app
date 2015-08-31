@@ -18,4 +18,6 @@ public interface ApiErrorMessage {
 	public static final String PROBE_POSITION_REQUIRED = "3003";
 	public static final String PROBE_COMMAND_REQUIRED = "3004";
 	public static final String PROBE_REQUIRED = "3005";
+	public static final String INVALID_DIRECTION = "3006";
+	public static final String INVALID_COMMAND = "3007";
 }

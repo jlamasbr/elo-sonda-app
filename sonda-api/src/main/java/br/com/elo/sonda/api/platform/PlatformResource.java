@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.elo.sonda.api.error.BadRequestException;
 import br.com.elo.sonda.api.probe.ProbeConverter;
 import br.com.elo.sonda.app.platform.CoordinateNotFoundOnPlatformException;
 import br.com.elo.sonda.app.platform.Platform;
@@ -37,8 +38,7 @@ public class PlatformResource {
 			platform = platformService.explorePlatform(platform, probes);
 			response.setProbes(ProbeConverter.convertToSpaceProbeParameter(platform.getSpaceProbes()));
 		} catch (CoordinateNotFoundOnPlatformException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BadRequestException(e.getErrorCode(), e.getToCoordinate(),e.getMinimumCoordinate(),e.getMaxCoordinate());
 		}
 		
 		return response;

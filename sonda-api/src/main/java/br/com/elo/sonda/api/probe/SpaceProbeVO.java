@@ -1,14 +1,20 @@
 package br.com.elo.sonda.api.probe;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.elo.sonda.api.error.ApiErrorMessage;
 
 public class SpaceProbeVO {
+
+	private static final List<String> VALID_COMMANDS = Arrays.asList("L", "R", "M");
 
 	@NotNull(message = ApiErrorMessage.PROBE_POSITION_REQUIRED)
 	@Valid
@@ -31,5 +37,11 @@ public class SpaceProbeVO {
 
 	public void setCommands(List<String> commands) {
 		this.commands = commands;
+	}
+
+	@JsonIgnore
+	@AssertTrue(message = ApiErrorMessage.INVALID_COMMAND)
+	public boolean isValidCommand() {
+		return commands == null || VALID_COMMANDS.containsAll(commands);
 	}
 }

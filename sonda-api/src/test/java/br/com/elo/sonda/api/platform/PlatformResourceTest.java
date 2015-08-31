@@ -110,7 +110,7 @@ public class PlatformResourceTest {
 				.andExpect(content().contentType("application/json;charset=UTF-8"))
 				.andExpect(jsonPath("$.errors[*]", hasSize(2))) //
 				.andExpect(jsonPath("$.errors[*].code",
-						is(Arrays.asList(ApiErrorMessage.INVALID_LONGITUDE, ApiErrorMessage.INVALID_LATITUDE)))); //
+						is(Arrays.asList(ApiErrorMessage.INVALID_LATITUDE, ApiErrorMessage.INVALID_LONGITUDE)))); //
 	}
 
 }

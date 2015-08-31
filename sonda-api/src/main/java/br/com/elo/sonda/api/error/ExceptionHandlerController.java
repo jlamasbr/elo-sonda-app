@@ -58,13 +58,24 @@ public class ExceptionHandlerController {
 	 */
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public @ResponseBody BadRequestResponse handlerBadRequest(MethodArgumentNotValidException e, HttpServletRequest request, @RequestBody Object requestBody) throws IOException {
+	public @ResponseBody BadRequestResponse handlerValidationException(MethodArgumentNotValidException e, HttpServletRequest request, @RequestBody Object requestBody) throws IOException {
 		BadRequestResponse response = new BadRequestResponse();
 		response.setErrors(buildErrorMessages(e));
 		LOG.info("EVT=BadRequest, response=" + response);
 		return response;
 	}
 
+	@ExceptionHandler(value = BadRequestException.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public @ResponseBody BadRequestResponse handlerBadRequest(BadRequestException e, HttpServletRequest request, @RequestBody Object requestBody) throws IOException {
+		BadRequestResponse response = new BadRequestResponse();
+		String message = messages.getMessage(e.getCode(), e.getMessageParams(),
+				LocaleContextHolder.getLocale());
+		response.setErrors(Arrays.asList(new ErrorVO(e.getCode(), message)));
+		LOG.info("EVT=BadRequest, response=" + response);
+		return response;
+	}
+	
 	/**
 	 * Método que encapsula erros ao realizar o parser do request do client da
 	 * api.
