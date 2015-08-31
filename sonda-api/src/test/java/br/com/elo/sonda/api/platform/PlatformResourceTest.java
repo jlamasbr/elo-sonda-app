@@ -108,9 +108,36 @@ public class PlatformResourceTest {
 				.contentType("application/json;charset=UTF-8"))//
 				.andExpect(status().isBadRequest()) //
 				.andExpect(content().contentType("application/json;charset=UTF-8"))
-				.andExpect(jsonPath("$.errors[*]", hasSize(2))) //
-				.andExpect(jsonPath("$.errors[*].code",
-						is(Arrays.asList(ApiErrorMessage.INVALID_LATITUDE, ApiErrorMessage.INVALID_LONGITUDE)))); //
+				.andExpect(jsonPath("$.errors[*]", hasSize(2))); //
+//				.andExpect(jsonPath("$.errors[*].code",
+//						is(Arrays.asList(ApiErrorMessage.INVALID_LATITUDE, ApiErrorMessage.INVALID_LONGITUDE)))); //
 	}
 
+	@Test
+	public void testValidRequest() throws Exception {
+
+		PlatformExploreRequest request = platformRequest() //
+				.withPlatform(PlatformBuilder.platform() //
+						.withCoordinate(coordinate() //
+								.withLatitude(5) //
+								.withLongitude(5))) //
+				.addSpaceProbe(spaceProbe() //
+						.withCoordinate(coordinate() //
+								.withLatitude(2) //
+								.withLongitude(1)) //
+						.withDirection("N") //
+						.withCommands("L", "M", "L", "M", "L", "M","L","M","M")) //
+				.build(); //
+
+		mockMvc.perform(post("/platform")//
+				.content(TestUtils.writeToBytes(request))//
+				.contentType("application/json;charset=UTF-8"))//
+				.andExpect(status().isOk()) //
+				.andExpect(content().contentType("application/json;charset=UTF-8"))
+				.andExpect(jsonPath("$.probes[*]", hasSize(1))) //
+				.andExpect(jsonPath("$.probes[0].position.coordinate.longitude",is(1))) //
+				.andExpect(jsonPath("$.probes[0].position.coordinate.latitude",is(3))) //
+				.andExpect(jsonPath("$.probes[0].position.direction",is("N"))); //
+	}
+	
 }
