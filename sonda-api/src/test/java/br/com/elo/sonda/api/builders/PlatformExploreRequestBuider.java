@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.elo.sonda.api.platform.PlatformExploreRequest;
-import br.com.elo.sonda.api.probe.SpaceProbeParameter;
+import br.com.elo.sonda.api.probe.SpaceProbeVO;
 
 public class PlatformExploreRequestBuider {
 
@@ -39,8 +39,8 @@ public class PlatformExploreRequestBuider {
 		return exploreRequest;
 	}
 
-	private List<SpaceProbeParameter> buildSpaceProbes() {
-		List<SpaceProbeParameter> spaceProbeParameters = new ArrayList<>();
+	private List<SpaceProbeVO> buildSpaceProbes() {
+		List<SpaceProbeVO> spaceProbeParameters = new ArrayList<>();
 		for (ProbeBuilder builder : probeBuilders) {
 			spaceProbeParameters.add(builder.build());
 		}

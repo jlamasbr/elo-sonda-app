@@ -1,4 +1,4 @@
-package br.com.elo.sonda.api.error.controller;
+package br.com.elo.sonda.api.error;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import br.com.elo.sonda.api.error.response.BadRequestResponse;
-import br.com.elo.sonda.api.error.response.Error;
 
 /**
  * Controller para capturar as exceções lancadas pela api e encapsular elas em
@@ -81,7 +78,7 @@ public class ExceptionHandlerController {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public @ResponseBody BadRequestResponse handlerNotReadableException(HttpServletRequest request) throws IOException {
 		BadRequestResponse response = new BadRequestResponse();
-		Error error = new Error("0001", messages.getMessage("0001", null, LocaleContextHolder.getLocale()));
+		ErrorVO error = new ErrorVO("0001", messages.getMessage("0001", null, LocaleContextHolder.getLocale()));
 		response.setErrors(Arrays.asList(error));
 		LOG.info("EVT=BadRequest, response=" + response);
 		return response;
@@ -98,14 +95,14 @@ public class ExceptionHandlerController {
 	 *            erros de validacao.
 	 * @return - Lista contendo as mensagens e codigos de validacao.
 	 */
-	private List<Error> buildErrorMessages(MethodArgumentNotValidException e) {
+	private List<ErrorVO> buildErrorMessages(MethodArgumentNotValidException e) {
 		BindingResult bindingResult = e.getBindingResult();
 		List<FieldError> errors = bindingResult.getFieldErrors();
-		List<Error> apiErrors = new ArrayList<>();
+		List<ErrorVO> apiErrors = new ArrayList<>();
 		for (FieldError error : errors) {
 			String message = messages.getMessage(error.getDefaultMessage(), error.getArguments(),
 					LocaleContextHolder.getLocale());
-			apiErrors.add(new Error(error.getDefaultMessage(), message));
+			apiErrors.add(new ErrorVO(error.getDefaultMessage(), message));
 		}
 		return apiErrors;
 	}

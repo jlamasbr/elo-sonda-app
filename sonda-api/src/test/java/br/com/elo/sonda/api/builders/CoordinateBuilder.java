@@ -1,13 +1,13 @@
 package br.com.elo.sonda.api.builders;
 
-import br.com.elo.sonda.api.coordinate.CoordinateParameter;
+import br.com.elo.sonda.api.coordinate.CoordinateVO;
 
 public class CoordinateBuilder {
 
-	private CoordinateParameter coordinateParameter;
+	private CoordinateVO coordinateParameter;
 	
 	private CoordinateBuilder(){
-		this.coordinateParameter = new CoordinateParameter();
+		this.coordinateParameter = new CoordinateVO();
 	}
 	
 	public static CoordinateBuilder coordinate(){
@@ -24,7 +24,7 @@ public class CoordinateBuilder {
 		return this;
 	}
 	
-	public CoordinateParameter build(){
+	public CoordinateVO build(){
 		return coordinateParameter;
 	}
 }

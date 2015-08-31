@@ -1,14 +1,14 @@
 package br.com.elo.sonda.api.builders;
 
-import br.com.elo.sonda.api.platform.PlatformParameter;
+import br.com.elo.sonda.api.platform.PlatformVO;
 
 public class PlatformBuilder {
 
-	private PlatformParameter platformParameter;
+	private PlatformVO platformParameter;
 	private CoordinateBuilder coordinateBuilder;
 
 	private PlatformBuilder() {
-		this.platformParameter = new PlatformParameter();
+		this.platformParameter = new PlatformVO();
 	}
 
 	public static PlatformBuilder platform() {
@@ -25,7 +25,7 @@ public class PlatformBuilder {
 		return this;
 	}
 
-	public PlatformParameter build() {
+	public PlatformVO build() {
 		if (coordinateBuilder != null) {
 			this.platformParameter.setMaxCoordinate(coordinateBuilder.build());
 		}

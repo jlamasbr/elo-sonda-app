@@ -8,20 +8,20 @@ import javax.validation.constraints.Size;
 
 import br.com.elo.sonda.api.error.ApiErrorMessage;
 
-public class SpaceProbeParameter {
+public class SpaceProbeVO {
 
 	@NotNull(message = ApiErrorMessage.PROBE_POSITION_REQUIRED)
 	@Valid
-	private ProbePositionParameter position;
+	private ProbePositionVO position;
 
 	@Size(min = 1, message = ApiErrorMessage.PROBE_COMMAND_REQUIRED)
 	private List<String> commands;
 
-	public ProbePositionParameter getPosition() {
+	public ProbePositionVO getPosition() {
 		return position;
 	}
 
-	public void setPosition(ProbePositionParameter initialPosition) {
+	public void setPosition(ProbePositionVO initialPosition) {
 		this.position = initialPosition;
 	}
 

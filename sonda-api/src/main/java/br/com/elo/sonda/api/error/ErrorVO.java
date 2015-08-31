@@ -1,11 +1,11 @@
-package br.com.elo.sonda.api.error.response;
+package br.com.elo.sonda.api.error;
 
-public class Error {
+public class ErrorVO {
 
 	private String code;
 	private String message;
 
-	public Error(final String code, final String message) {
+	public ErrorVO(final String code, final String message) {
 		this.code = code;
 		this.message = message;
 	}

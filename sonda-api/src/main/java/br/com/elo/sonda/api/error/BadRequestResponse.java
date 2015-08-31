@@ -1,4 +1,4 @@
-package br.com.elo.sonda.api.error.response;
+package br.com.elo.sonda.api.error;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class BadRequestResponse {
 
 	@JacksonXmlElementWrapper(localName="errors")
 	@JacksonXmlProperty(localName = "error")
-	private List<Error> errors;
+	private List<ErrorVO> errors;
 
 	public String getHttpStatus() {
 		return httpStatus;
@@ -21,11 +21,11 @@ public class BadRequestResponse {
 		this.httpStatus = httpStatus;
 	}
 
-	public List<Error> getErrors() {
+	public List<ErrorVO> getErrors() {
 		return errors;
 	}
 
-	public void setErrors(List<Error> errors) {
+	public void setErrors(List<ErrorVO> errors) {
 		this.errors = errors;
 	}
 

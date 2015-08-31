@@ -2,18 +2,18 @@ package br.com.elo.sonda.api.builders;
 
 import java.util.Arrays;
 
-import br.com.elo.sonda.api.probe.ProbePositionParameter;
-import br.com.elo.sonda.api.probe.SpaceProbeParameter;
+import br.com.elo.sonda.api.probe.ProbePositionVO;
+import br.com.elo.sonda.api.probe.SpaceProbeVO;
 
 public class ProbeBuilder {
 
-	private ProbePositionParameter probePositionParameter;
-	private SpaceProbeParameter spaceProbeParameter;
+	private ProbePositionVO probePositionParameter;
+	private SpaceProbeVO spaceProbeParameter;
 	private CoordinateBuilder coordinateBuilder;
 
 	private ProbeBuilder() {
-		this.probePositionParameter = new ProbePositionParameter();
-		this.spaceProbeParameter = new SpaceProbeParameter();
+		this.probePositionParameter = new ProbePositionVO();
+		this.spaceProbeParameter = new SpaceProbeVO();
 		this.coordinateBuilder = CoordinateBuilder.coordinate();
 	}
 	
@@ -36,7 +36,7 @@ public class ProbeBuilder {
 		return this;
 	}
 
-	public SpaceProbeParameter build() {
+	public SpaceProbeVO build() {
 		this.probePositionParameter.setCoordinate(coordinateBuilder.build());
 		this.spaceProbeParameter.setPosition(probePositionParameter);
 		return spaceProbeParameter;

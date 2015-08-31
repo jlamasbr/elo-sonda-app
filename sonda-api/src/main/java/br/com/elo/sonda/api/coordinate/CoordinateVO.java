@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import br.com.elo.sonda.api.error.ApiErrorMessage;
 
 
-public class CoordinateParameter {
+public class CoordinateVO {
 
 	@NotNull(message = ApiErrorMessage.LONGITUDE_REQUIRED)
 	@Min(value = 0L, message=ApiErrorMessage.INVALID_LONGITUDE)
