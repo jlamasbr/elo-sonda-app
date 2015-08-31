@@ -72,3 +72,7 @@ As requisições devem ser feitas via POST na url http://localhost:8080/platform
 
 ##TODO
 1- ) Incluir JPA para persistir as sondas na plataforma para posteriormente serem consultas via api (GET).
+
+2- Melhorar validacoes de coordenada direcao e comandos, indicando qual sonda esta errada.
+
+3 - Cobrir com mais testes de integração a api.
